@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] public float speed;
     [SerializeField] public float jumpForce;
     [SerializeField] public float energy;
-    [SerializeField] GameObject checkpoint;
     private bool isRight;
     public bool isSliding;
     public bool isBouncy;
@@ -24,8 +23,7 @@ public class Player : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         col = GetComponent<CircleCollider2D>();
-        rb2d.isKinematic = false;
-        transform.position = checkpoint.transform.position;
+        transform.position = GameManager.Instance.checkpoint.position;
     }
 
     // Update is called once per frame
@@ -36,6 +34,9 @@ public class Player : MonoBehaviour
             Flip();
         }else if(isRight && horizontal < 0){
             Flip();
+        }
+        if(transform.position.y < -10){
+            Die();
         }
     }
 
@@ -71,7 +72,6 @@ public class Player : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context){
         if(!isSliding || rb2d.velocity.x == 0){
-            Debug.Log("Get Value");
             horizontal = context.ReadValue<Vector2>().x;
         }
     }
@@ -101,6 +101,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnCollisionExit2D(Collision2D col){
+        if(col.gameObject.CompareTag("Slide") && IsGrounded()){
+           horizontal = 0;
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Bounce")){
             Debug.Log("a");
@@ -110,8 +116,7 @@ public class Player : MonoBehaviour
 
     void Die(){
         isDead = true;
-        rb2d.isKinematic = true;
-        Destroy(this, 1f);
+        transform.position = GameManager.Instance.checkpoint.position;
     }
 
 }
