@@ -17,7 +17,7 @@ public class Recharge : MonoBehaviour
     {
         if (collision.CompareTag("Plyaer"))
         {
-            //player.energy++
+            player.energy++;
         }
     }
 }

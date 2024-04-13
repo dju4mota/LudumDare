@@ -14,12 +14,12 @@ public class Enemy : MonoBehaviour
 
     public void Slow()
     {
-        // player.speed = 0;
+        player.speed = 5;
     }
 
     public void LowJump()
     {
-        // player.jump = 0;
+        player.jumpForce = 2.5f;
     }
 
 
