@@ -14,11 +14,13 @@ public class Player : MonoBehaviour
     [SerializeField] public float speed;
     [SerializeField] public float jumpForce;
     [SerializeField] public float energy;
+    public Vector2 slidingVelocity;
     private bool isRight;
     public bool isSliding;
     public bool isBouncy;
     private float bounceForce;
     private bool isDead;
+    float dir = 0.5412f;
 
     // Summons
 
@@ -37,7 +39,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);
+        if(!isSliding)
+            rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);
+
         if(!isRight && horizontal > 0){
             Flip();
         }else if(isRight && horizontal < 0){
@@ -50,8 +54,10 @@ public class Player : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context){
         if(context.performed && IsGrounded()){
-            if(!isBouncy)
+            if(!isBouncy){
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+                Debug.Log("jump");
+            }
             else{
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 1.5f*jumpForce);
             }
@@ -79,9 +85,11 @@ public class Player : MonoBehaviour
     }
 
     public void Move(InputAction.CallbackContext context){
-        if(!isSliding || rb2d.velocity.x == 0){
-            horizontal = context.ReadValue<Vector2>().x;
+        horizontal = context.ReadValue<Vector2>().x;
+        if(isSliding){
+            rb2d.AddForce(new(horizontal * speed, rb2d.velocity.y), ForceMode2D.Impulse);
         }
+
     }
 
     public void Summon(InputAction.CallbackContext context){
@@ -112,12 +120,6 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Bounce") && bounceForce > 2f){
             Debug.Log(bounceForce);
             rb2d.velocity = new Vector2(rb2d.velocity.x, bounceForce);
-        }
-    }
-
-    public void OnCollisionExit2D(Collision2D col){
-        if(col.gameObject.CompareTag("Slide") && IsGrounded()){
-           horizontal = 0;
         }
     }
 

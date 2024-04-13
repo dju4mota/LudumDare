@@ -5,24 +5,28 @@ using UnityEngine;
 
 public class RangeController : MonoBehaviour
 {
-    private GameObject player;
-    private Vector3 mousePosition;
+    private Transform player;
     [SerializeField] float maxRange;
-    private Vector2 Range;
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInParent<Player>().gameObject;
+        player = GetComponentInParent<Player>().gameObject.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Range.x = MathF.Min(maxRange, mousePosition.x);
-        Range.y = MathF.Min(maxRange, mousePosition.y);
-        transform.position = new(Range.x, Range.y, 0);
-        Debug.Log(Range);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; 
+        Vector3 direction = mousePosition - player.position;
+        direction = Vector3.ClampMagnitude(direction, maxRange); 
+        direction = direction.normalized * maxRange;      
+        Vector3 clampedMousePosition = player.position + direction;
+
+        transform.position = clampedMousePosition;
+
+        if(Input.GetKeyDown(KeyCode.Z))
+            Debug.Log(mousePosition);
     }
 }
