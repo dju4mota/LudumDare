@@ -8,13 +8,31 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] public int slow;
     [SerializeField] public int lowJump;
-    [SerializeField] public int timer;
-    [SerializeField] public bool isOutOfDanger = false;
+    [SerializeField] public float timerMax;
+    [SerializeField] public float timerAtual;
+    [SerializeField] public bool onDanger = false;
+    [SerializeField] public GameObject timerBarObj;
+    [SerializeField] public TimerBar timerBar;
 
 
     private void Awake()
     {
         Instance = this;
+    }
+    private void Update()
+    {
+    
+        if(onDanger)
+        {
+            if(timerAtual > 0)
+            {
+                timerAtual -= Time.deltaTime;
+            }
+            else
+            {
+                player.StartCoroutine(player.Die());
+            }
+        }
     }
 
     public void Slow()
@@ -39,20 +57,16 @@ public class Enemy : MonoBehaviour
 
     public void StartTimer()
     {
-        isOutOfDanger = false;
-        Invoke("KillPlayer", timer);
-    }
-    public void KillPlayer()
-    {
-        if (!isOutOfDanger)
-        {
-            player.StartCoroutine(player.Die());
-        }
+        onDanger = true;
+        timerAtual = timerMax;
+        timerBarObj.SetActive(true);
+        timerBar.Restart(timerMax);
     }
 
     public void StopTimer()
     {
-        isOutOfDanger = true;
+        onDanger = false;
+        timerBarObj.SetActive(false);
     }
 
 
