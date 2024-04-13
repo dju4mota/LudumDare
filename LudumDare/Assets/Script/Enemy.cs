@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public static Enemy Instance;
     private Player player;
-    
+    [SerializeField] public int slow;
+    [SerializeField] public int lowJump;
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     void Start()
     {
         player = GetComponent<Player>();    
@@ -14,12 +24,22 @@ public class Enemy : MonoBehaviour
 
     public void Slow()
     {
-        player.speed = 5;
+        player.speed = slow;
+    }
+
+    public void RevertSlow()
+    {
+        player.speed = 10;
     }
 
     public void LowJump()
     {
-        player.jumpForce = 2.5f;
+        player.jumpForce = lowJump;    
+    }
+
+    public void RevertJump()
+    {
+        player.jumpForce = 5;
     }
 
 
