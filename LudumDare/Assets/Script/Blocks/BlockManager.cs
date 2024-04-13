@@ -17,7 +17,7 @@ public class BlockManager : MonoBehaviour
     {
         Instance = this;
     }
-
+    
     public enum BlockEnum
     {
         Block,
