@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5131566610009425498}
   - component: {fileID: 5009820883257311760}
   m_Layer: 0
-  m_Name: ColliderAreaEffect
+  m_Name: ColliderTimerEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,4 +80,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ddce65c2027894a9a5bb892bf6f807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: 0
+  effect: 2
