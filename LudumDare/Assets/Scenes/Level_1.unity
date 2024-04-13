@@ -281,6 +281,55 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &256757937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256757939}
+  - component: {fileID: 256757938}
+  m_Layer: 0
+  m_Name: BlockManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &256757938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256757937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc29ee7199388974c98eecc18d546e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 5048176372297133994, guid: fa9e2580acc71e54098f92d8dc5fd9b6, type: 3}
+  slide: {fileID: 0}
+  timer: {fileID: 0}
+  bounce: {fileID: 0}
+  spikes: {fileID: 0}
+--- !u!4 &256757939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256757937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &499580011
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 499580011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.67, y: 1.65, z: 0}
+  m_LocalPosition: {x: -6.67, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -448,6 +497,9 @@ MonoBehaviour:
   energy: 0
   isSliding: 0
   isBouncy: 0
+  StandardPlatform: {fileID: 0}
+  SlidingPlatform: {fileID: 0}
+  BoucingPlatform: {fileID: 0}
 --- !u!114 &499580017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +605,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 60d58b0e-bdd2-4558-b658-409adbafff48
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 499580016}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Summon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 035d749d-b09a-4487-ba77-b63127bde457
+    m_ActionName: Player/Summon[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -643,8 +711,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 98.35, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1435,3 +1503,4 @@ SceneRoots:
   - {fileID: 1703095185}
   - {fileID: 1425696820}
   - {fileID: 7189557322691454844}
+  - {fileID: 256757939}

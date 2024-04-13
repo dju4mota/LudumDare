@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,12 @@ public class Player : MonoBehaviour
     public bool isBouncy;
     private float bounceForce;
     private bool isDead;
+
+    // Summons
+
+    [SerializeField] GameObject StandardPlatform;
+    [SerializeField] GameObject SlidingPlatform;
+    [SerializeField] GameObject BoucingPlatform;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +81,12 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context){
         if(!isSliding || rb2d.velocity.x == 0){
             horizontal = context.ReadValue<Vector2>().x;
+        }
+    }
+
+    public void Summon(InputAction.CallbackContext context){
+        if(context.performed){
+            BlockManager.Instance.addBlock(BlockManager.BlockEnum.Block, new(transform.position.x, transform.position.y - 5f));
         }
     }
 
