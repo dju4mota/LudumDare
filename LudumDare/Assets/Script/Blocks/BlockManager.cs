@@ -5,12 +5,18 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
     //[SerializeField] private List<GameObject> blockList;
+    public static BlockManager Instance;
     [SerializeField] private GameObject block;
     [SerializeField] private GameObject slide;
     [SerializeField] private GameObject timer;
     [SerializeField] private GameObject bounce;
     [SerializeField] private GameObject spikes;
 
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public enum BlockEnum
     {
