@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator Die(){
+    public IEnumerator Die(){
         isDead = true;
         rb2d.bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(1f);

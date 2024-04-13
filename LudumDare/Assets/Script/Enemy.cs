@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     private Player player;
     [SerializeField] public int slow;
     [SerializeField] public int lowJump;
+    [SerializeField] public int timer;
+    [SerializeField] public bool isOutOfDanger = false;
 
 
     private void Awake()
@@ -42,6 +44,23 @@ public class Enemy : MonoBehaviour
         player.jumpForce = 5;
     }
 
+    public void StartTimer()
+    {
+        isOutOfDanger = false;
+        Invoke("KillPlayer", timer);
+    }
+    public void KillPlayer()
+    {
+        if (!isOutOfDanger)
+        {
+            player.StartCoroutine(player.Die());
+        }
+    }
+
+    public void StopTimer()
+    {
+        isOutOfDanger = true;
+    }
 
 
 }
