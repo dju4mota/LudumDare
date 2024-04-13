@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public bool isBouncy;
     private float bounceForce;
     private bool isDead;
-    private Vector3 curVel = Vector3.zero;
+    public float cooldown;
 
     [SerializeField] BlockManager.BlockEnum Platform = BlockManager.BlockEnum.Block;
     void Start()
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Mathf.Clamp(rb2d.velocity.x, -15f, 15f);
         if(!isSliding)
             rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);
 
@@ -46,6 +47,9 @@ public class Player : MonoBehaviour
         if(transform.position.y < -10){
             StartCoroutine(Die());
         }
+
+        cooldown = Mathf.Min(cooldown, 1f);
+        cooldown += Time.deltaTime;
     }
 
     public void Jump(InputAction.CallbackContext context){
@@ -91,40 +95,17 @@ public class Player : MonoBehaviour
     }
 
     public void SlidingMovement(){
-        if(rb2d.velocity.x < 10f)
             if(isRight){
                 rb2d.AddForce(Vector2.right * 10f);
             }else{
             rb2d.AddForce(Vector2.left * 10f);
             }
-        else{
-        rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);    
-        }   
-        
     }
-
-    private IEnumerator Sliding(float from, float to)
-    {
-        float elapsed = 0f;
-        float duration = 1f;
-
-        while (elapsed < duration)
-        {
-            float t = elapsed / duration;
-            Debug.Log("Desacelerando");
-
-            slidingSpeed = Mathf.Lerp(from, to, t);
-            elapsed += Time.deltaTime;
-
-            yield return null;
-        }
-        slidingSpeed = to;
-    }
-
 
     public void Summon(InputAction.CallbackContext context){
-        if(context.performed){
+        if(context.performed && cooldown == 1f){
             BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
+            cooldown = 0f;
         }
     }
 
@@ -138,6 +119,7 @@ public class Player : MonoBehaviour
 
          if(col.gameObject.CompareTag("Slide")){
             isSliding = true;
+            SlidingMovement();
         }else{
             isSliding = false;
         }
