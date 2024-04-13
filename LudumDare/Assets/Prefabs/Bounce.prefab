@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6696676618300930835}
   - component: {fileID: 2094397751035700527}
   - component: {fileID: 6262920163646230617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bounce
   m_TagString: Bounce
   m_Icon: {fileID: 0}
@@ -171,3 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a951593066779b44f81b25269cb35e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0.5

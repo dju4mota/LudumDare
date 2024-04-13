@@ -7,7 +7,7 @@ public class Block : MonoBehaviour
 {
 
     private Transform poosition;
-    [SerializeField] private float duration = 3f;
+    [SerializeField] private float duration = 0.5f;
     private int id;
 
 
@@ -22,7 +22,7 @@ public class Block : MonoBehaviour
 
     private void CooldownPassed()
     {
-            Destroy(this,0.3f);
+            Destroy(gameObject);
     }
 
 }

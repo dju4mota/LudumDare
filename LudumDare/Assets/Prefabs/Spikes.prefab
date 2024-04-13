@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1133675017282937653}
   - component: {fileID: 5497302967171741527}
   - component: {fileID: 7488208979516213863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spikes
   m_TagString: Spikes
   m_Icon: {fileID: 0}
@@ -171,3 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cde6a7396943444aaf0c73e5215df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0.5

@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
 
     public void Summon(InputAction.CallbackContext context){
         if(context.performed){
-            BlockManager.Instance.addBlock(BlockManager.BlockEnum.Block, new(transform.position.x, transform.position.y - 5f));
+            BlockManager.Instance.addBlock(BlockManager.BlockEnum.Block, new(transform.position.x, transform.position.y - 1f));
         }
     }
 
