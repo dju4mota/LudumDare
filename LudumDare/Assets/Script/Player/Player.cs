@@ -13,14 +13,16 @@ public class Player : MonoBehaviour
     private CircleCollider2D col;
     private float horizontal;
     [SerializeField] public float speed;
+    [SerializeField] public GameObject SummonedPlatform;
+    [SerializeField] public float slidingSpeed;
     [SerializeField] public float jumpForce;
     [SerializeField] public float energy;
-    public Vector2 slidingVelocity;
     private bool isRight;
     public bool isSliding;
     public bool isBouncy;
     private float bounceForce;
     private bool isDead;
+    private Vector3 curVel = Vector3.zero;
 
     [SerializeField] BlockManager.BlockEnum Platform = BlockManager.BlockEnum.Block;
     void Start()
@@ -86,29 +88,58 @@ public class Player : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context){
         horizontal = context.ReadValue<Vector2>().x;
-        if(isSliding){
-            rb2d.AddForce(new(horizontal * speed, rb2d.velocity.y), ForceMode2D.Impulse);
-        }
-
     }
+
+    public void SlidingMovement(){
+        if(rb2d.velocity.x < 10f)
+            if(isRight){
+                rb2d.AddForce(Vector2.right * 10f);
+            }else{
+            rb2d.AddForce(Vector2.left * 10f);
+            }
+        else{
+        rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);    
+        }   
+        
+    }
+
+    private IEnumerator Sliding(float from, float to)
+    {
+        float elapsed = 0f;
+        float duration = 1f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            Debug.Log("Desacelerando");
+
+            slidingSpeed = Mathf.Lerp(from, to, t);
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        slidingSpeed = to;
+    }
+
 
     public void Summon(InputAction.CallbackContext context){
         if(context.performed){
-            BlockManager.Instance.addBlock(Platform, new(transform.position.x, transform.position.y - 1f));
+            BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
         }
     }
 
     public void OnCollisionStay2D(Collision2D col){
-        if(col.gameObject.CompareTag("Slide")){
-            isSliding = true;
-        }else{
-            isSliding = false;
-        }
 
         if(col.gameObject.CompareTag("Bounce")){
             isBouncy = true;
         }else{
             isBouncy = false;
+        }
+
+         if(col.gameObject.CompareTag("Slide")){
+            isSliding = true;
+        }else{
+            isSliding = false;
         }
 
         if(col.gameObject.CompareTag("Spikes")){
@@ -122,7 +153,7 @@ public class Player : MonoBehaviour
             rb2d.velocity = new Vector2(rb2d.velocity.x, bounceForce);
         }
         if(col.gameObject.CompareTag("Slide")){
-            isSliding = true;
+            SlidingMovement();
         }
     }
 

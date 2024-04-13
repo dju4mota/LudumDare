@@ -171,9 +171,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   State: 0
-  player: {fileID: 0}
-  menu_pause: {fileID: 0}
-  checkpoint: {fileID: 0}
+  player: {fileID: 1410139132}
+  menu_pause: {fileID: 1518054115}
+  checkpoint: {fileID: 1711260312}
 --- !u!1 &305645758
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &305645759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -614,7 +614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &761743526
 RectTransform:
   m_ObjectHideFlags: 0
@@ -773,11 +773,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc29ee7199388974c98eecc18d546e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 0}
-  slide: {fileID: 0}
-  timer: {fileID: 0}
-  bounce: {fileID: 0}
-  spikes: {fileID: 0}
+  block: {fileID: 5048176372297133994, guid: fa9e2580acc71e54098f92d8dc5fd9b6, type: 3}
+  slide: {fileID: 5969363114840155945, guid: 65358275a7dee4a42be2e0e6980ca755, type: 3}
+  timer: {fileID: 6123281635916847082, guid: d8a31e432291097439b9226e79c1b648, type: 3}
+  bounce: {fileID: 9219986630432686287, guid: 4aceb52f8b0ab634288d5ccfcd7088e4, type: 3}
+  spikes: {fileID: 5424642353802061593, guid: 868b1c090d326a948ae221cf738b1102, type: 3}
 --- !u!1 &1097449651
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +910,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ee8a92839427274eb8aa7765c5e425d, type: 3}
+--- !u!1 &1384174584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384174586}
+  - component: {fileID: 1384174585}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1384174585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384174584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5aa57f9a655204f9382cc06c1e803e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slow: 12
+  lowJump: 12
+  timer: 12
+  isOutOfDanger: 0
+--- !u!4 &1384174586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384174584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5747707, y: -0.80260724, z: -0.034700286}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1410139131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,6 +1571,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592904854}
   m_CullTransparentMesh: 1
+--- !u!1 &1711260311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1711260312}
+  m_Layer: 0
+  m_Name: Checkpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1711260312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711260311}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.59, y: -2.81, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854366243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,3 +2081,5 @@ SceneRoots:
   - {fileID: 432575512}
   - {fileID: 828091229}
   - {fileID: 1447614919}
+  - {fileID: 1711260312}
+  - {fileID: 1384174586}
