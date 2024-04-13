@@ -12,15 +12,20 @@ public class Player : MonoBehaviour
     [SerializeField] public float speed;
     [SerializeField] public float jumpForce;
     [SerializeField] public float energy;
+    [SerializeField] GameObject checkpoint;
     private bool isRight;
     public bool isSliding;
     public bool isBouncy;
+    private float bounceForce;
+    private bool isDead;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         col = GetComponent<CircleCollider2D>();
+        rb2d.isKinematic = false;
+        transform.position = checkpoint.transform.position;
     }
 
     // Update is called once per frame
@@ -31,9 +36,6 @@ public class Player : MonoBehaviour
             Flip();
         }else if(isRight && horizontal < 0){
             Flip();
-        }
-        if(isSliding){
-            Sliding();
         }
     }
 
@@ -68,7 +70,10 @@ public class Player : MonoBehaviour
     }
 
     public void Move(InputAction.CallbackContext context){
-        horizontal = context.ReadValue<Vector2>().x;
+        if(!isSliding || rb2d.velocity.x == 0){
+            Debug.Log("Get Value");
+            horizontal = context.ReadValue<Vector2>().x;
+        }
     }
 
     public void OnCollisionStay2D(Collision2D col){
@@ -83,18 +88,30 @@ public class Player : MonoBehaviour
         }else{
             isBouncy = false;
         }
+
+        if(col.gameObject.CompareTag("Spikes")){
+            Die();
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D col){
-        if(col.gameObject.CompareTag("Bounce")){
-            Debug.Log(rb2d.velocity.y/2);
-            rb2d.AddForce(new Vector2(0, rb2d.velocity.y/2));
+        if(col.gameObject.CompareTag("Bounce") && bounceForce > 2f){
+            Debug.Log(bounceForce);
+            rb2d.velocity = new Vector2(rb2d.velocity.x, bounceForce);
         }
     }
 
-    public void Sliding(){
-        if(rb2d.velocity.x != 0){
-            rb2d.velocity = new Vector2();
+    public void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.CompareTag("Bounce")){
+            Debug.Log("a");
+            bounceForce = -rb2d.velocity.y/2;
         }
     }
+
+    void Die(){
+        isDead = true;
+        rb2d.isKinematic = true;
+        Destroy(this, 1f);
+    }
+
 }
