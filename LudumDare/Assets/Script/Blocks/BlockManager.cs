@@ -9,6 +9,7 @@ public class BlockManager : MonoBehaviour
     [SerializeField] private GameObject slide;
     [SerializeField] private GameObject timer;
     [SerializeField] private GameObject bounce;
+    [SerializeField] private GameObject spikes;
 
 
     public enum BlockEnum
@@ -16,7 +17,8 @@ public class BlockManager : MonoBehaviour
         Block,
         Slide,
         Bounce,
-        Timer
+        Timer,
+        Spikes
 
     }
 
@@ -44,6 +46,9 @@ public class BlockManager : MonoBehaviour
                 break;
             case BlockEnum.Timer:
                 Instantiate(timer, pos, Quaternion.identity);
+                break;
+            case BlockEnum.Spikes:
+                Instantiate(spikes, pos, Quaternion.identity);
                 break;
         }
     }
