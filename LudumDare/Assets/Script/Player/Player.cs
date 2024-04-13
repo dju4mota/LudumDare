@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
             Flip();
         }
         if(transform.position.y < -10){
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -90,7 +91,7 @@ public class Player : MonoBehaviour
         }
 
         if(col.gameObject.CompareTag("Spikes")){
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -109,13 +110,16 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Bounce")){
-            Debug.Log("a");
             bounceForce = -rb2d.velocity.y/2;
         }
     }
 
-    void Die(){
+    IEnumerator Die(){
         isDead = true;
+        rb2d.bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(1f);
+        isDead = false;
+        rb2d.bodyType = RigidbodyType2D.Dynamic;
         transform.position = GameManager.Instance.checkpoint.position;
     }
 
