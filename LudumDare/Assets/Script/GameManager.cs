@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Canvas menu_pause;
 
+    [SerializeField] public Transform checkpoint;
+
     private void Awake()
     {
         Instance = this;
