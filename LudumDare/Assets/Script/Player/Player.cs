@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -20,15 +21,8 @@ public class Player : MonoBehaviour
     public bool isBouncy;
     private float bounceForce;
     private bool isDead;
-    float dir = 0.5412f;
 
-    // Summons
-
-    [SerializeField] GameObject StandardPlatform;
-    [SerializeField] GameObject SlidingPlatform;
-    [SerializeField] GameObject BoucingPlatform;
-
-    // Start is called before the first frame update
+    [SerializeField] BlockManager.BlockEnum Platform = BlockManager.BlockEnum.Block;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -72,6 +66,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void GetGround(InputAction.CallbackContext context){
+        if(context.performed){
+            Platform = GridBlock.Instance.changeBlock();
+        }
+    }
+
     private bool IsGrounded(){
         RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f, Vector2.down, 0.1f, GameManager.Instance.groundMask);
         return hit.collider != null;
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
     public void Summon(InputAction.CallbackContext context){
         if(context.performed){
-            BlockManager.Instance.addBlock(BlockManager.BlockEnum.Block, new(transform.position.x, transform.position.y - 1f));
+            BlockManager.Instance.addBlock(Platform, new(transform.position.x, transform.position.y - 1f));
         }
     }
 
@@ -120,6 +120,9 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Bounce") && bounceForce > 2f){
             Debug.Log(bounceForce);
             rb2d.velocity = new Vector2(rb2d.velocity.x, bounceForce);
+        }
+        if(col.gameObject.CompareTag("Slide")){
+            isSliding = true;
         }
     }
 

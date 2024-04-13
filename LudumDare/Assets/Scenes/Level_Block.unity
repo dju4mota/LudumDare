@@ -944,13 +944,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpForce: 5
+  jumpForce: 10
   energy: 0
+  slidingVelocity: {x: 0, y: 0}
   isSliding: 0
   isBouncy: 0
-  StandardPlatform: {fileID: 0}
-  SlidingPlatform: {fileID: 0}
-  BoucingPlatform: {fileID: 0}
+  Platform: 0
 --- !u!114 &1410139133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1071,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 035d749d-b09a-4487-ba77-b63127bde457
     m_ActionName: Player/Summon[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1410139132}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: GetGround
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f499effd-0a9b-42c6-9651-53844edeb7c5
+    m_ActionName: Player/Choose[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1092,7 +1107,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 16376125988994a4c9688038a72d16e5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2

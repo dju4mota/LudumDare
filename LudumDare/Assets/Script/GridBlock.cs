@@ -7,6 +7,7 @@ using static UnityEditor.PlayerSettings;
 
 public class GridBlock : MonoBehaviour
 {
+    public static GridBlock Instance;
 
     [SerializeField] public BlockManager.BlockEnum selectedBlock;
     [SerializeField] public Image block;
@@ -14,6 +15,9 @@ public class GridBlock : MonoBehaviour
     [SerializeField] public Image bounce;
 
 
+    private void Awake(){
+        Instance = this;
+    }
     private void Start()
     {
         block.enabled = true;
