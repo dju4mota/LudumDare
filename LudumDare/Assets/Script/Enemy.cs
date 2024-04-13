@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public static Enemy Instance;
-    private Player player;
+    [SerializeField] private Player player;
     [SerializeField] public int slow;
     [SerializeField] public int lowJump;
     [SerializeField] public int timer;
@@ -16,13 +16,6 @@ public class Enemy : MonoBehaviour
     {
         Instance = this;
     }
-
-
-    void Start()
-    {
-        player = GetComponent<Player>();    
-    }
-
 
     public void Slow()
     {
@@ -41,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     public void RevertJump()
     {
-        player.jumpForce = 5;
+        player.jumpForce = 10;
     }
 
     public void StartTimer()
