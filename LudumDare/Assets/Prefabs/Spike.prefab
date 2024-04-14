@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8043520902204427877}
   - component: {fileID: 7420613672635580517}
-  - component: {fileID: 6451855245845103963}
   - component: {fileID: 1880029129793275207}
   - component: {fileID: 8460735004593630723}
   m_Layer: 0
   m_Name: Spike
-  m_TagString: Untagged
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6451855245845103963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518128590895731719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34cde6a7396943444aaf0c73e5215df3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!50 &1880029129793275207
 Rigidbody2D:
   serializedVersion: 4

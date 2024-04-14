@@ -16,7 +16,7 @@ public class StartMenu : MonoBehaviour
 
     private void StartNewGame()
     {
-        GameManager.Instance.LoadScene(GameManager.Scene.Level_1);
+        GameManager.Instance.LoadScene(GameManager.Scene.Level_Block);
     }
 
 }

@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static BlockManager;
-using static UnityEditor.PlayerSettings;
+
 
 public class GridBlock : MonoBehaviour
 {
     public static GridBlock Instance;
 
-    [SerializeField] public BlockManager.BlockEnum selectedBlock;
+    [SerializeField] public BlockEnum selectedBlock;
     [SerializeField] public Image block;
     [SerializeField] public Image slide;
     [SerializeField] public Image bounce;
@@ -26,7 +24,7 @@ public class GridBlock : MonoBehaviour
         selectedBlock = BlockEnum.Block;
     }
 
-    public BlockManager.BlockEnum changeBlock()
+    public BlockEnum changeBlock()
     {        
         switch (selectedBlock)
         {

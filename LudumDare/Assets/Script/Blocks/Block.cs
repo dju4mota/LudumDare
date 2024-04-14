@@ -7,7 +7,7 @@ public class Block : MonoBehaviour
 {
 
     private Transform poosition;
-    [SerializeField] private float duration = 1f;
+    [SerializeField] private float duration = 2f;
     private int id;
 
 
