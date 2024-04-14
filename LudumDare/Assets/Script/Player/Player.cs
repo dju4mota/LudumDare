@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] public GameObject SummonedPlatform;
     [SerializeField] public float slidingSpeed;
     [SerializeField] public float jumpForce;
-    [SerializeField] public float energy;
+    [SerializeField] public int Maxenergy;
+    [SerializeField] public int energy;
     private bool isRight;
     public bool isSliding;
     public bool isBouncy;
@@ -107,6 +108,7 @@ public class Player : MonoBehaviour
 
     public void Summon(InputAction.CallbackContext context){
         if(context.performed && cooldown >= 1f){
+            CheckEnergy();
             BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
             cooldown = 0f;
         }
@@ -140,6 +142,9 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Slide")){
             SlidingMovement();
         }
+        if(col.gameObject.CompareTag("Checkpoint")){
+            energy = Maxenergy;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D col){
@@ -155,6 +160,14 @@ public class Player : MonoBehaviour
         isDead = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         transform.position = GameManager.Instance.checkpoint.position;
+    }
+
+    public bool CheckEnergy(){
+        int custo = BlockManager.Instance.GetEnergy(Platform);
+        if(custo < energy){
+            energy -= custo;
+            return true;
+        }return false;
     }
 
     void Animations(){

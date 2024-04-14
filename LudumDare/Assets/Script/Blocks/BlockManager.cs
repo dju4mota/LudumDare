@@ -64,4 +64,16 @@ public class BlockManager : MonoBehaviour
     {
 
     }
+
+    public int GetEnergy(BlockEnum blockType){
+        switch (blockType)
+        {
+            case BlockEnum.Block:
+               return 1;
+            case BlockEnum.Bounce:
+                return 3;
+            case BlockEnum.Slide:
+                return 2;
+        }  return 0;
+    }
 }

@@ -47,7 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdf415a5c7b93c44859f77771c388f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  duration: 2
+  cost: 1
+  sprite:
+  - {fileID: 2143689779, guid: 089055778d006c74ca69b9810ac87755, type: 3}
+  - {fileID: 1128934881, guid: 089055778d006c74ca69b9810ac87755, type: 3}
+  - {fileID: 945642119, guid: 089055778d006c74ca69b9810ac87755, type: 3}
 --- !u!61 &5417241762404930428
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80,7 +85,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0016243458, y: -0.0040608644}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}

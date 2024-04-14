@@ -5,35 +5,27 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private AnimationController anim;
     [SerializeField] private float duration = 2f;
     private float timer;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite[] sprite;
 
     private void Start(){
-        anim = GetComponent<AnimationController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         timer = duration;
+        Invoke("CooldownPassed", duration);
     }
 
     private void Update(){
         timer -= Time.deltaTime;
         if(timer > 2*duration/3){
-            anim.ChangeAnimationState("1");
+            spriteRenderer.sprite = sprite[0];
         }
-        if(timer == 2*duration/3){
-            anim.ChangeAnimationState("2");
+        else if(timer <= 2*duration/3 && timer > duration/3){
+            spriteRenderer.sprite = sprite[1];
         }
-        else if(timer == duration/3){
-            anim.ChangeAnimationState("3");
-        }
-    }
-
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-            Invoke("CooldownPassed", duration);
+        else{
+            spriteRenderer.sprite = sprite[2];
         }
     }
 
