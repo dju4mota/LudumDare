@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private CircleCollider2D col;
+    private AnimationController anim;
     private float horizontal;
     [SerializeField] public float speed;
     [SerializeField] public GameObject SummonedPlatform;
@@ -29,12 +30,14 @@ public class Player : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         col = GetComponent<CircleCollider2D>();
+        anim = GetComponent<AnimationController>();
         transform.position = GameManager.Instance.checkpoint.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Animations();
         Mathf.Clamp(rb2d.velocity.x, -15f, 15f);
         if(!isSliding)
             rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);
@@ -148,10 +151,29 @@ public class Player : MonoBehaviour
     public IEnumerator Die(){
         isDead = true;
         rb2d.bodyType = RigidbodyType2D.Static;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
         isDead = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         transform.position = GameManager.Instance.checkpoint.position;
+    }
+
+    void Animations(){
+        if(isDead){
+            anim.ChangeAnimationState("Dead");
+        }
+        else if(horizontal != 0 && IsGrounded()){
+            anim.ChangeAnimationState("Running");
+        }
+        else if(!IsGrounded()){
+            if(rb2d.velocity.y < 0){
+                anim.ChangeAnimationState("Falling");
+            }else{
+                anim.ChangeAnimationState("Jumping");
+            }
+        }
+        else{
+            anim.ChangeAnimationState("Idle");
+        }   
     }
 
 }
