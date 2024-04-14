@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
     }
 
     public void Summon(InputAction.CallbackContext context){
-        if(context.performed && cooldown == 1f){
+        if(context.performed && cooldown >= 1f){
             BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
             cooldown = 0f;
         }
