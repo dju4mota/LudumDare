@@ -114,9 +114,16 @@ public class Player : MonoBehaviour
         if(context.performed && cooldown >= 1f){
             if(CheckEnergy()){
                 BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
-                AudioManager.Instance.PlaySFX("Summon");
                 cooldown = 0f;
             }
+        }
+    }
+    
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.Instance.PauseGame();
         }
     }
 
@@ -151,7 +158,11 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Checkpoint")){
             energy = Maxenergy;
         }
-    }
+        if (col.gameObject.CompareTag("Spikes"))
+        {
+            Die();
+        }
+        }
 
     public void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Bounce")){
@@ -166,11 +177,12 @@ public class Player : MonoBehaviour
         isDead = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         transform.position = GameManager.Instance.checkpoint.position;
+        energy = Maxenergy;
     }
 
     public bool CheckEnergy(){
         int custo = BlockManager.Instance.GetEnergy(Platform);
-        if(custo < energy){
+        if(custo <= energy){
             energy -= custo;
             return true;
         }return false;

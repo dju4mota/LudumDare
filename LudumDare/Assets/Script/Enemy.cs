@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     public void RevertJump()
     {
-        player.jumpForce = 10;
+        player.jumpForce = 12;
     }
 
     public void StartTimer()
