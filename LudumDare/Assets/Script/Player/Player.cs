@@ -114,6 +114,7 @@ public class Player : MonoBehaviour
         if(context.performed && cooldown >= 1f){
             if(CheckEnergy()){
                 BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
+                AudioManager.Instance.PlaySFX("Summon");
                 cooldown = 0f;
             }
         }
