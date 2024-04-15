@@ -10,7 +10,7 @@ public class Recharge : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             player.energy += 4;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

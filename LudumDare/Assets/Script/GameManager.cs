@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public Player player;
     public Canvas menu_pause;
+    [SerializeField] public GameObject[] charges;
 
     [SerializeField] public Transform checkpoint;
 
@@ -34,6 +35,14 @@ public class GameManager : MonoBehaviour
         player.IsPaused = true;
         Time.timeScale = 0f;
         menu_pause.gameObject.SetActive(true);
+    }
+
+    public void RespawCharge()
+    {
+        for (int i = 0; i < charges.Length; i++)
+        {
+            charges[i].SetActive(true);
+        }
     }
 
     public void ResumeGame()

@@ -178,6 +178,7 @@ public class Player : MonoBehaviour
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         transform.position = GameManager.Instance.checkpoint.position;
         energy = Maxenergy;
+        GameManager.Instance.RespawCharge();
     }
 
     public bool CheckEnergy(){
