@@ -40,9 +40,13 @@ public class Player : MonoBehaviour
     {
         Animations();
         Mathf.Clamp(rb2d.velocity.x, -15f, 15f);
-        if(!isSliding)
-            rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);
-
+        if(!isSliding){
+            if(IsGrounded()){
+                rb2d.velocity = new Vector2(horizontal * speed, rb2d.velocity.y);
+            }else{
+                rb2d.velocity = new Vector2(horizontal * speed/2, rb2d.velocity.y);
+            }
+        }
         if(!isRight && horizontal > 0){
             Flip();
         }else if(isRight && horizontal < 0){
@@ -108,9 +112,10 @@ public class Player : MonoBehaviour
 
     public void Summon(InputAction.CallbackContext context){
         if(context.performed && cooldown >= 1f){
-            CheckEnergy();
-            BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
-            cooldown = 0f;
+            if(CheckEnergy()){
+                BlockManager.Instance.addBlock(Platform, SummonedPlatform.transform.position);
+                cooldown = 0f;
+            }
         }
     }
 
